@@ -71,6 +71,13 @@
   :type 'string
   :group 'hyde)
 
+(defcustom hyde/use-octopress
+  nil
+  "Changes some behaviors when using Octopress"
+  :type 'boolean
+  :group 'hyde)
+
+
 ;; Faces and font-locking
 (defface hyde-header-face
   '(
@@ -287,6 +294,8 @@ user"
       (insert "layout: post\n")
       (insert (format "title: \"%s\"\n" title))
       (insert (format "date: \"%s\"\n" (format-time-string "%Y-%m-%d %H:%M:%S %z")))
+      (when hyde/use-octopress
+        (insert (format "comments: true\ncategories:\n")))
       (insert "---\n\n")
       (save-buffer))
     (hyde/hyde-add-file post-file-name)
