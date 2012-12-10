@@ -307,6 +307,8 @@ user"
     (define-key hyde-mode-map (kbd "p") 'hyde/promote-to-post)
     (define-key hyde-mode-map (kbd "q") 'hyde/quit)
     (define-key hyde-mode-map (kbd "RET") 'hyde/open-post-maybe)
+    (define-key hyde-mode-map (kbd "e") 'hyde/open-post-maybe)
+    (define-key hyde-mode-map (kbd "f") 'hyde/open-post-maybe)
     (define-key hyde-mode-map (kbd "?") 'hyde/help)
     hyde-mode-map)
   "Keymap for Hyde")
