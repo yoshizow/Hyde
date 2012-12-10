@@ -287,6 +287,12 @@ user"
   (interactive)
   (kill-buffer (current-buffer)))
 
+(defun hyde/help ()
+  "Show key bindings"
+  (interactive)
+  (let (minor-mode-alist minor-mode-list)
+    (describe-mode)))
+
 
 ;; Keymaps
 (defvar hyde-mode-map
@@ -301,6 +307,7 @@ user"
     (define-key hyde-mode-map (kbd "p") 'hyde/promote-to-post)
     (define-key hyde-mode-map (kbd "q") 'hyde/quit)
     (define-key hyde-mode-map (kbd "RET") 'hyde/open-post-maybe)
+    (define-key hyde-mode-map (kbd "?") 'hyde/help)
     hyde-mode-map)
   "Keymap for Hyde")
 
