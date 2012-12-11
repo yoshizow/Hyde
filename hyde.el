@@ -247,6 +247,19 @@ user"
 			       (concat hyde-posts-dir "/" post-file-name)))
     (hyde/load-posts)))
 
+(defun hyde/unpromote-to-draft (pos)
+  "Unpromotes the post under the cursor from a post to a draft"
+  (interactive "d")
+  (let (
+	(post-file-name (nth 
+			 1
+			 (split-string (strip-string (thing-at-point 'line)) " : ")))
+	(dir (get-text-property pos 'dir)))
+    (if (equal dir hyde-posts-dir)
+	(hyde/hyde-rename-file (concat dir "/" post-file-name)
+			       (concat hyde-drafts-dir "/" post-file-name)))
+    (hyde/load-posts)))
+
 
 (defun hyde/open-post-maybe (pos)
   "Opens the post under cursor in the editor"
@@ -305,6 +318,7 @@ user"
     (define-key hyde-mode-map (kbd "j") 'hyde/run-jekyll)
     (define-key hyde-mode-map (kbd "d") 'hyde/deploy)
     (define-key hyde-mode-map (kbd "p") 'hyde/promote-to-post)
+    (define-key hyde-mode-map (kbd "u") 'hyde/unpromote-to-draft)
     (define-key hyde-mode-map (kbd "q") 'hyde/quit)
     (define-key hyde-mode-map (kbd "RET") 'hyde/open-post-maybe)
     (define-key hyde-mode-map (kbd "e") 'hyde/open-post-maybe)
@@ -321,6 +335,7 @@ user"
     ["Open post" hyde/open-post-maybe t]
     ["Commit post" hyde/hyde-commit-post t]
     ["Promote post" hyde/promote-to-post t]
+    ["Unpromote post" hyde/unpromote-to-draft t]
     "---"
     ["Refresh" hyde/load-posts t]
     ["Run Jekyll" hyde/run-jekyll t]
