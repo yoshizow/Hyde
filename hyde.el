@@ -283,7 +283,7 @@ user"
 (defun hyde/new-post (title)
   "Creates a new post"
   (interactive "MEnter post title: ")
-  (let ((post-file-name (expand-file-name (format "%s/%s/%s.markdown" 
+  (let ((post-file-name (expand-file-name (format "%s/%s/%s.md"
                                                   hyde-home hyde-drafts-dir (concat 
                                                                              (format-time-string "%Y-%m-%d-")
                                                                              (downcase (replace-regexp-in-string " " "_" title)))))))
@@ -293,9 +293,9 @@ user"
       (insert "---\n")
       (insert "layout: post\n")
       (insert (format "title: \"%s\"\n" title))
-      (insert (format "date: \"%s\"\n" (format-time-string "%Y-%m-%d %H:%M:%S %z")))
+      (insert (format "date: %s\n" (format-time-string "%Y-%m-%d %H:%M")))
       (when hyde/use-octopress
-        (insert (format "comments: true\ncategories:\n")))
+        (insert (format "comments: true\ncategories: []\npublished: true\n")))
       (insert "---\n\n")
       (save-buffer))
     (hyde/hyde-add-file post-file-name)
